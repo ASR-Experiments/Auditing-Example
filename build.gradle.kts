@@ -5,6 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.15.RELEASE"
 //    Can be ignored
 	id("org.sonarqube") version "3.5.0.2730"
+	id("org.springdoc.openapi-gradle-plugin") version "1.5.0"
 }
 
 group = "com.asr.personal"
@@ -23,8 +24,8 @@ repositories {
 
 sonarqube {
 	properties {
-		property("sonar.projectKey", "caching-example")
-		property("sonar.organization", "my-experiments")
+		property("sonar.projectKey", "ASR-Experiments_Auditing-Example")
+		property("sonar.organization", "asr-experiments")
 		property("sonar.host.url", "https://sonarcloud.io")
 		property("sonar.exclusions", "**/build/**/*")
 	}
@@ -42,6 +43,11 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
+//    Open API Spec
+	implementation("org.springdoc:springdoc-openapi-ui:1.6.13")
+	implementation("org.springdoc:springdoc-openapi-data-rest:1.6.13")
+	implementation("org.springdoc:springdoc-openapi-javadoc:1.6.13")
+	implementation("org.springdoc:springdoc-openapi-security:1.6.13")
 }
 
 tasks.withType<Test> {
