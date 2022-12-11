@@ -13,7 +13,7 @@ public class SecurityConfig {
     http.cors()
         .and()
         .authorizeRequests()
-        .antMatchers("/actuator", "/actuator/**")
+        .antMatchers("/actuator", "/actuator/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html")
         .permitAll()
         .anyRequest()
         .authenticated()
