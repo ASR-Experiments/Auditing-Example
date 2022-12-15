@@ -1,0 +1,579 @@
+{
+	"info": {
+		"_postman_id": "9ae3541b-d41c-402b-8127-30ab305e1968",
+		"name": "Auditing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13601294"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Get Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"console.log(response)\r",
+									"pm.globals.set(\"ACCESS_TOKEN\", response.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{AUTH_CLIENT_ID}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{AUTH_CLIENT_SECRET}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{AUTH_SERVER}}/realms/{{AUTH_REALM}}/protocol/openid-connect/token",
+							"host": [
+								"{{AUTH_SERVER}}"
+							],
+							"path": [
+								"realms",
+								"{{AUTH_REALM}}",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "{{AUTH_CLIENT_ID}}",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "{{AUTH_CLIENT_SECRET}}",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "user",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "user",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{AUTH_SERVER}}/realms/{{AUTH_REALM}}/protocol/openid-connect/token",
+									"host": [
+										"{{AUTH_SERVER}}"
+									],
+									"path": [
+										"realms",
+										"{{AUTH_REALM}}",
+										"protocol",
+										"openid-connect",
+										"token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "KEYCLOAK_LOCALE=; Version=1; Comment=Expiring cookie; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/realms/sample_realm/; HttpOnly"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/realms/sample_realm/; HttpOnly"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "2325"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJQNDhGbGFXQzg3cEItWWIyQTRJYVNFQ09TNXB3WU1DamdoSG9idkFNQlhVIn0.eyJleHAiOjE2NzA3ODI3NDcsImlhdCI6MTY3MDc4MjQ0NywianRpIjoiM2RmYTRjZjMtMTcxMi00MWJkLWEwNjMtYTNmMTVmMDQ4OTlkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYW1wbGVfcmVhbG0iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYmI4YzNhOTYtNzNhNy00ZjlhLWE2OGEtYjU0NmNlOTJiNjUzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYXVkaXRpbmctZXhhbXBsZSIsInNlc3Npb25fc3RhdGUiOiJmZTE3ZDNmNi00ZWEwLTRlODgtOTAwYS1lZDYwMjhmMWRlYWIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLXNhbXBsZV9yZWFsbSIsInVtYV9hdXRob3JpemF0aW9uIiwiQVBQX1VTRVIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiJmZTE3ZDNmNi00ZWEwLTRlODgtOTAwYS1lZDYwMjhmMWRlYWIiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFTUiBVc2VyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlciIsImdpdmVuX25hbWUiOiJBU1IiLCJmYW1pbHlfbmFtZSI6IlVzZXIiLCJlbWFpbCI6ImFzci51c2VyQHlvcG1haWwuY29tIn0.TFKnf1oMBZk9zDZU0yJi83cc_cS551XIe_n7CO3LKupEPKaMGdsiq9GD0M4OORbgKPYJyvflKoCGZWIVuqMfa3OM-BmptB_hOSticEblELlgKLDfyKBdHx4spLwGSEjFQktx6qbVZ-q90qaO876R5I4RepteRkjCPwR0xNigU0tYCdiMUCcEs-Gg4s0xBNULzYo4IkqKEz7vRqdokj6acECKNbg4qCLK-aaUP0vlOjKrPP5KpJY9WTDWW8iBl1YB0WVooCnyMgiQbA3pYze_uatC_OqqVdySbb1dF9tSalqgfwVP1PwI7KpYvKcniDc9xcNrD16Sc-RBBghVms7paw\",\n    \"expires_in\": 300,\n    \"refresh_expires_in\": 1800,\n    \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5MWJlNjk4Yy04NjE4LTQ3NmYtYjczNC0wMGQ2ZWMyZDU4YWUifQ.eyJleHAiOjE2NzA3ODQyNDcsImlhdCI6MTY3MDc4MjQ0NywianRpIjoiYmU5Y2YwMGYtYmFkZC00ZTM0LTliMGItZDJiODBiOTg2NzliIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYW1wbGVfcmVhbG0iLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcmVhbG1zL3NhbXBsZV9yZWFsbSIsInN1YiI6ImJiOGMzYTk2LTczYTctNGY5YS1hNjhhLWI1NDZjZTkyYjY1MyIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJhdWRpdGluZy1leGFtcGxlIiwic2Vzc2lvbl9zdGF0ZSI6ImZlMTdkM2Y2LTRlYTAtNGU4OC05MDBhLWVkNjAyOGYxZGVhYiIsInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6ImZlMTdkM2Y2LTRlYTAtNGU4OC05MDBhLWVkNjAyOGYxZGVhYiJ9.Lp8EFBwZ0vtpQWcuIMfPcUFR8zECtko0AgCG-AB3MdI\",\n    \"token_type\": \"Bearer\",\n    \"not-before-policy\": 0,\n    \"session_state\": \"fe17d3f6-4ea0-4e88-900a-ed6028f1deab\",\n    \"scope\": \"email profile\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "App",
+			"item": [
+				{
+					"name": "Get principal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_SERVER}}/test/user",
+							"host": [
+								"{{APP_SERVER}}"
+							],
+							"path": [
+								"test",
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get principal",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APP_SERVER}}/test/user",
+									"host": [
+										"{{APP_SERVER}}"
+									],
+									"path": [
+										"test",
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Dec 2022 18:15:32 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"authorities\": [\n        {\n            \"authority\": \"SCOPE_email\"\n        },\n        {\n            \"authority\": \"SCOPE_profile\"\n        }\n    ],\n    \"details\": {\n        \"remoteAddress\": \"0:0:0:0:0:0:0:1\",\n        \"sessionId\": null\n    },\n    \"authenticated\": true,\n    \"principal\": {\n        \"tokenValue\": \"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJQNDhGbGFXQzg3cEItWWIyQTRJYVNFQ09TNXB3WU1DamdoSG9idkFNQlhVIn0.eyJleHAiOjE2NzA3ODI3NDcsImlhdCI6MTY3MDc4MjQ0NywianRpIjoiM2RmYTRjZjMtMTcxMi00MWJkLWEwNjMtYTNmMTVmMDQ4OTlkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYW1wbGVfcmVhbG0iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYmI4YzNhOTYtNzNhNy00ZjlhLWE2OGEtYjU0NmNlOTJiNjUzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYXVkaXRpbmctZXhhbXBsZSIsInNlc3Npb25fc3RhdGUiOiJmZTE3ZDNmNi00ZWEwLTRlODgtOTAwYS1lZDYwMjhmMWRlYWIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLXNhbXBsZV9yZWFsbSIsInVtYV9hdXRob3JpemF0aW9uIiwiQVBQX1VTRVIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiJmZTE3ZDNmNi00ZWEwLTRlODgtOTAwYS1lZDYwMjhmMWRlYWIiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFTUiBVc2VyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlciIsImdpdmVuX25hbWUiOiJBU1IiLCJmYW1pbHlfbmFtZSI6IlVzZXIiLCJlbWFpbCI6ImFzci51c2VyQHlvcG1haWwuY29tIn0.TFKnf1oMBZk9zDZU0yJi83cc_cS551XIe_n7CO3LKupEPKaMGdsiq9GD0M4OORbgKPYJyvflKoCGZWIVuqMfa3OM-BmptB_hOSticEblELlgKLDfyKBdHx4spLwGSEjFQktx6qbVZ-q90qaO876R5I4RepteRkjCPwR0xNigU0tYCdiMUCcEs-Gg4s0xBNULzYo4IkqKEz7vRqdokj6acECKNbg4qCLK-aaUP0vlOjKrPP5KpJY9WTDWW8iBl1YB0WVooCnyMgiQbA3pYze_uatC_OqqVdySbb1dF9tSalqgfwVP1PwI7KpYvKcniDc9xcNrD16Sc-RBBghVms7paw\",\n        \"issuedAt\": \"2022-12-11T18:14:07Z\",\n        \"expiresAt\": \"2022-12-11T18:19:07Z\",\n        \"headers\": {\n            \"kid\": \"P48FlaWC87pB-Yb2A4IaSECOS5pwYMCjghHobvAMBXU\",\n            \"typ\": \"JWT\",\n            \"alg\": \"RS256\"\n        },\n        \"claims\": {\n            \"sub\": \"bb8c3a96-73a7-4f9a-a68a-b546ce92b653\",\n            \"resource_access\": {\n                \"account\": {\n                    \"roles\": [\n                        \"manage-account\",\n                        \"manage-account-links\",\n                        \"view-profile\"\n                    ]\n                }\n            },\n            \"email_verified\": true,\n            \"allowed-origins\": [\n                \"http://localhost:9090\"\n            ],\n            \"iss\": \"http://localhost:8080/realms/sample_realm\",\n            \"typ\": \"Bearer\",\n            \"preferred_username\": \"user\",\n            \"given_name\": \"ASR\",\n            \"sid\": \"fe17d3f6-4ea0-4e88-900a-ed6028f1deab\",\n            \"aud\": [\n                \"account\"\n            ],\n            \"acr\": \"1\",\n            \"realm_access\": {\n                \"roles\": [\n                    \"offline_access\",\n                    \"default-roles-sample_realm\",\n                    \"uma_authorization\",\n                    \"APP_USER\"\n                ]\n            },\n            \"azp\": \"auditing-example\",\n            \"scope\": \"email profile\",\n            \"name\": \"ASR User\",\n            \"exp\": \"2022-12-11T18:19:07Z\",\n            \"session_state\": \"fe17d3f6-4ea0-4e88-900a-ed6028f1deab\",\n            \"iat\": \"2022-12-11T18:14:07Z\",\n            \"family_name\": \"User\",\n            \"jti\": \"3dfa4cf3-1712-41bd-a063-a3f15f04899d\",\n            \"email\": \"asr.user@yopmail.com\"\n        },\n        \"issuer\": \"http://localhost:8080/realms/sample_realm\",\n        \"subject\": \"bb8c3a96-73a7-4f9a-a68a-b546ce92b653\",\n        \"audience\": [\n            \"account\"\n        ],\n        \"notBefore\": null,\n        \"id\": \"3dfa4cf3-1712-41bd-a063-a3f15f04899d\"\n    },\n    \"credentials\": {\n        \"tokenValue\": \"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJQNDhGbGFXQzg3cEItWWIyQTRJYVNFQ09TNXB3WU1DamdoSG9idkFNQlhVIn0.eyJleHAiOjE2NzA3ODI3NDcsImlhdCI6MTY3MDc4MjQ0NywianRpIjoiM2RmYTRjZjMtMTcxMi00MWJkLWEwNjMtYTNmMTVmMDQ4OTlkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYW1wbGVfcmVhbG0iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYmI4YzNhOTYtNzNhNy00ZjlhLWE2OGEtYjU0NmNlOTJiNjUzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYXVkaXRpbmctZXhhbXBsZSIsInNlc3Npb25fc3RhdGUiOiJmZTE3ZDNmNi00ZWEwLTRlODgtOTAwYS1lZDYwMjhmMWRlYWIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLXNhbXBsZV9yZWFsbSIsInVtYV9hdXRob3JpemF0aW9uIiwiQVBQX1VTRVIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiJmZTE3ZDNmNi00ZWEwLTRlODgtOTAwYS1lZDYwMjhmMWRlYWIiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFTUiBVc2VyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlciIsImdpdmVuX25hbWUiOiJBU1IiLCJmYW1pbHlfbmFtZSI6IlVzZXIiLCJlbWFpbCI6ImFzci51c2VyQHlvcG1haWwuY29tIn0.TFKnf1oMBZk9zDZU0yJi83cc_cS551XIe_n7CO3LKupEPKaMGdsiq9GD0M4OORbgKPYJyvflKoCGZWIVuqMfa3OM-BmptB_hOSticEblELlgKLDfyKBdHx4spLwGSEjFQktx6qbVZ-q90qaO876R5I4RepteRkjCPwR0xNigU0tYCdiMUCcEs-Gg4s0xBNULzYo4IkqKEz7vRqdokj6acECKNbg4qCLK-aaUP0vlOjKrPP5KpJY9WTDWW8iBl1YB0WVooCnyMgiQbA3pYze_uatC_OqqVdySbb1dF9tSalqgfwVP1PwI7KpYvKcniDc9xcNrD16Sc-RBBghVms7paw\",\n        \"issuedAt\": \"2022-12-11T18:14:07Z\",\n        \"expiresAt\": \"2022-12-11T18:19:07Z\",\n        \"headers\": {\n            \"kid\": \"P48FlaWC87pB-Yb2A4IaSECOS5pwYMCjghHobvAMBXU\",\n            \"typ\": \"JWT\",\n            \"alg\": \"RS256\"\n        },\n        \"claims\": {\n            \"sub\": \"bb8c3a96-73a7-4f9a-a68a-b546ce92b653\",\n            \"resource_access\": {\n                \"account\": {\n                    \"roles\": [\n                        \"manage-account\",\n                        \"manage-account-links\",\n                        \"view-profile\"\n                    ]\n                }\n            },\n            \"email_verified\": true,\n            \"allowed-origins\": [\n                \"http://localhost:9090\"\n            ],\n            \"iss\": \"http://localhost:8080/realms/sample_realm\",\n            \"typ\": \"Bearer\",\n            \"preferred_username\": \"user\",\n            \"given_name\": \"ASR\",\n            \"sid\": \"fe17d3f6-4ea0-4e88-900a-ed6028f1deab\",\n            \"aud\": [\n                \"account\"\n            ],\n            \"acr\": \"1\",\n            \"realm_access\": {\n                \"roles\": [\n                    \"offline_access\",\n                    \"default-roles-sample_realm\",\n                    \"uma_authorization\",\n                    \"APP_USER\"\n                ]\n            },\n            \"azp\": \"auditing-example\",\n            \"scope\": \"email profile\",\n            \"name\": \"ASR User\",\n            \"exp\": \"2022-12-11T18:19:07Z\",\n            \"session_state\": \"fe17d3f6-4ea0-4e88-900a-ed6028f1deab\",\n            \"iat\": \"2022-12-11T18:14:07Z\",\n            \"family_name\": \"User\",\n            \"jti\": \"3dfa4cf3-1712-41bd-a063-a3f15f04899d\",\n            \"email\": \"asr.user@yopmail.com\"\n        },\n        \"issuer\": \"http://localhost:8080/realms/sample_realm\",\n        \"subject\": \"bb8c3a96-73a7-4f9a-a68a-b546ce92b653\",\n        \"audience\": [\n            \"account\"\n        ],\n        \"notBefore\": null,\n        \"id\": \"3dfa4cf3-1712-41bd-a063-a3f15f04899d\"\n    },\n    \"token\": {\n        \"tokenValue\": \"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJQNDhGbGFXQzg3cEItWWIyQTRJYVNFQ09TNXB3WU1DamdoSG9idkFNQlhVIn0.eyJleHAiOjE2NzA3ODI3NDcsImlhdCI6MTY3MDc4MjQ0NywianRpIjoiM2RmYTRjZjMtMTcxMi00MWJkLWEwNjMtYTNmMTVmMDQ4OTlkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zYW1wbGVfcmVhbG0iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYmI4YzNhOTYtNzNhNy00ZjlhLWE2OGEtYjU0NmNlOTJiNjUzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYXVkaXRpbmctZXhhbXBsZSIsInNlc3Npb25fc3RhdGUiOiJmZTE3ZDNmNi00ZWEwLTRlODgtOTAwYS1lZDYwMjhmMWRlYWIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6OTA5MCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLXNhbXBsZV9yZWFsbSIsInVtYV9hdXRob3JpemF0aW9uIiwiQVBQX1VTRVIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiJmZTE3ZDNmNi00ZWEwLTRlODgtOTAwYS1lZDYwMjhmMWRlYWIiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFTUiBVc2VyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlciIsImdpdmVuX25hbWUiOiJBU1IiLCJmYW1pbHlfbmFtZSI6IlVzZXIiLCJlbWFpbCI6ImFzci51c2VyQHlvcG1haWwuY29tIn0.TFKnf1oMBZk9zDZU0yJi83cc_cS551XIe_n7CO3LKupEPKaMGdsiq9GD0M4OORbgKPYJyvflKoCGZWIVuqMfa3OM-BmptB_hOSticEblELlgKLDfyKBdHx4spLwGSEjFQktx6qbVZ-q90qaO876R5I4RepteRkjCPwR0xNigU0tYCdiMUCcEs-Gg4s0xBNULzYo4IkqKEz7vRqdokj6acECKNbg4qCLK-aaUP0vlOjKrPP5KpJY9WTDWW8iBl1YB0WVooCnyMgiQbA3pYze_uatC_OqqVdySbb1dF9tSalqgfwVP1PwI7KpYvKcniDc9xcNrD16Sc-RBBghVms7paw\",\n        \"issuedAt\": \"2022-12-11T18:14:07Z\",\n        \"expiresAt\": \"2022-12-11T18:19:07Z\",\n        \"headers\": {\n            \"kid\": \"P48FlaWC87pB-Yb2A4IaSECOS5pwYMCjghHobvAMBXU\",\n            \"typ\": \"JWT\",\n            \"alg\": \"RS256\"\n        },\n        \"claims\": {\n            \"sub\": \"bb8c3a96-73a7-4f9a-a68a-b546ce92b653\",\n            \"resource_access\": {\n                \"account\": {\n                    \"roles\": [\n                        \"manage-account\",\n                        \"manage-account-links\",\n                        \"view-profile\"\n                    ]\n                }\n            },\n            \"email_verified\": true,\n            \"allowed-origins\": [\n                \"http://localhost:9090\"\n            ],\n            \"iss\": \"http://localhost:8080/realms/sample_realm\",\n            \"typ\": \"Bearer\",\n            \"preferred_username\": \"user\",\n            \"given_name\": \"ASR\",\n            \"sid\": \"fe17d3f6-4ea0-4e88-900a-ed6028f1deab\",\n            \"aud\": [\n                \"account\"\n            ],\n            \"acr\": \"1\",\n            \"realm_access\": {\n                \"roles\": [\n                    \"offline_access\",\n                    \"default-roles-sample_realm\",\n                    \"uma_authorization\",\n                    \"APP_USER\"\n                ]\n            },\n            \"azp\": \"auditing-example\",\n            \"scope\": \"email profile\",\n            \"name\": \"ASR User\",\n            \"exp\": \"2022-12-11T18:19:07Z\",\n            \"session_state\": \"fe17d3f6-4ea0-4e88-900a-ed6028f1deab\",\n            \"iat\": \"2022-12-11T18:14:07Z\",\n            \"family_name\": \"User\",\n            \"jti\": \"3dfa4cf3-1712-41bd-a063-a3f15f04899d\",\n            \"email\": \"asr.user@yopmail.com\"\n        },\n        \"issuer\": \"http://localhost:8080/realms/sample_realm\",\n        \"subject\": \"bb8c3a96-73a7-4f9a-a68a-b546ce92b653\",\n        \"audience\": [\n            \"account\"\n        ],\n        \"notBefore\": null,\n        \"id\": \"3dfa4cf3-1712-41bd-a063-a3f15f04899d\"\n    },\n    \"name\": \"bb8c3a96-73a7-4f9a-a68a-b546ce92b653\",\n    \"tokenAttributes\": {\n        \"sub\": \"bb8c3a96-73a7-4f9a-a68a-b546ce92b653\",\n        \"resource_access\": {\n            \"account\": {\n                \"roles\": [\n                    \"manage-account\",\n                    \"manage-account-links\",\n                    \"view-profile\"\n                ]\n            }\n        },\n        \"email_verified\": true,\n        \"allowed-origins\": [\n            \"http://localhost:9090\"\n        ],\n        \"iss\": \"http://localhost:8080/realms/sample_realm\",\n        \"typ\": \"Bearer\",\n        \"preferred_username\": \"user\",\n        \"given_name\": \"ASR\",\n        \"sid\": \"fe17d3f6-4ea0-4e88-900a-ed6028f1deab\",\n        \"aud\": [\n            \"account\"\n        ],\n        \"acr\": \"1\",\n        \"realm_access\": {\n            \"roles\": [\n                \"offline_access\",\n                \"default-roles-sample_realm\",\n                \"uma_authorization\",\n                \"APP_USER\"\n            ]\n        },\n        \"azp\": \"auditing-example\",\n        \"scope\": \"email profile\",\n        \"name\": \"ASR User\",\n        \"exp\": \"2022-12-11T18:19:07Z\",\n        \"session_state\": \"fe17d3f6-4ea0-4e88-900a-ed6028f1deab\",\n        \"iat\": \"2022-12-11T18:14:07Z\",\n        \"family_name\": \"User\",\n        \"jti\": \"3dfa4cf3-1712-41bd-a063-a3f15f04899d\",\n        \"email\": \"asr.user@yopmail.com\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Add Entity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"First\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_SERVER}}/testEntities",
+							"host": [
+								"{{APP_SERVER}}"
+							],
+							"path": [
+								"testEntities"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Entity",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"First\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_SERVER}}/testEntities",
+									"host": [
+										"{{APP_SERVER}}"
+									],
+									"path": [
+										"testEntities"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "ETag",
+									"value": "\"0\""
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Wed, 14 Dec 2022 20:18:49 GMT"
+								},
+								{
+									"key": "Location",
+									"value": "http://localhost:9090/testEntities/952323e6-3ea9-4795-a1fc-e73e87d777bc"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Dec 2022 20:18:49 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdDate\": \"2022-12-14T20:18:49.125+00:00\",\n    \"lastModifiedDate\": \"2022-12-14T20:18:49.125+00:00\",\n    \"createdBy\": \"asr.admin@yopmail.com\",\n    \"modifiedBy\": \"asr.admin@yopmail.com\",\n    \"name\": \"First\",\n    \"_links\": {\n        \"self\": {\n            \"href\": \"http://localhost:9090/testEntities/952323e6-3ea9-4795-a1fc-e73e87d777bc\"\n        },\n        \"testEntity\": {\n            \"href\": \"http://localhost:9090/testEntities/952323e6-3ea9-4795-a1fc-e73e87d777bc\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Patch Entity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Third\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_SERVER}}/testEntities/:id",
+							"host": [
+								"{{APP_SERVER}}"
+							],
+							"path": [
+								"testEntities",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4f6c8f7e-a427-46bc-8b3e-4e8179b686b9"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Patch Entity",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Second\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_SERVER}}/testEntities/:id",
+									"host": [
+										"{{APP_SERVER}}"
+									],
+									"path": [
+										"testEntities",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4f6c8f7e-a427-46bc-8b3e-4e8179b686b9"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "ETag",
+									"value": "\"1\""
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Wed, 14 Dec 2022 20:26:23 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Dec 2022 20:26:24 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdDate\": \"2022-12-14T20:25:32.538+00:00\",\n    \"lastModifiedDate\": \"2022-12-14T20:26:23.782+00:00\",\n    \"createdBy\": \"asr.user@yopmail.com\",\n    \"modifiedBy\": \"asr.user@yopmail.com\",\n    \"name\": \"Second\",\n    \"_links\": {\n        \"self\": {\n            \"href\": \"http://localhost:9090/testEntities/4f6c8f7e-a427-46bc-8b3e-4e8179b686b9\"\n        },\n        \"testEntity\": {\n            \"href\": \"http://localhost:9090/testEntities/4f6c8f7e-a427-46bc-8b3e-4e8179b686b9\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
